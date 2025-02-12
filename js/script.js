@@ -24,6 +24,78 @@ doubleChar("Adidas"); // "AAddiiddaass");
 doubleChar("abcd"); // "aabbccdd");
 
 /****************************************************************************************** */
+class PowerStation {
+    constructor(batteryCapacity, maximumInput, maximumOutput) {
+        this.batteryCapacity = batteryCapacity;
+        this.maximumInput = maximumInput;
+        this.maximumOutput = maximumOutput;
+        this.batteryLevel = batteryCapacity;
+        this.inputPower = 0;
+        this.outputs = new Map();
+    }
+
+    updateInput(voltage, current) {
+        this.inputPower = Math.min(voltage * current, this.maximumInput);
+    }
+
+    connectOutput(outputId) {
+        this.outputs.set(outputId, 0);
+    }
+
+    updateOutput(outputId, voltage, current) {
+        if (this.outputs.has(outputId)) {
+            this.outputs.set(outputId, voltage * current);
+        }
+    }
+
+    disconnectOutput(outputId) {
+        this.outputs.delete(outputId);
+    }
+
+    updateBatteryLevel(capacityLeft) {
+        this.batteryLevel = capacityLeft;
+    }
+
+    get batteryPercentage() {
+        return Number(
+            ((this.batteryLevel / this.batteryCapacity) * 100).toFixed(1)
+        );
+    }
+
+    get totalOutputPower() {
+        return [...this.outputs.values()].reduce(
+            (sum, power) => sum + power,
+            0
+        );
+    }
+
+    get timeRemaining() {
+        const netPower = this.inputPower - this.totalOutputPower;
+        if (netPower === 0) return "99:59";
+        const hours = Math.ceil(this.batteryLevel / Math.abs(netPower));
+        const minutes = (hours * 60) % 60;
+        return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+            2,
+            "0"
+        )}`;
+    }
+
+    get status() {
+        if (
+            this.totalOutputPower > this.maximumOutput ||
+            this.inputPower > this.maximumInput
+        ) {
+            return "overload";
+        } else if (this.inputPower > this.totalOutputPower) {
+            return "charging";
+        } else if (this.totalOutputPower > this.inputPower) {
+            return "discharging";
+        } else {
+            return "idle";
+        }
+    }
+}
+/**************************************************************************************** */
 
 function billboard(name, price = 30) {
     /*  console.log(
@@ -310,77 +382,20 @@ expandedForm(12); //, "10 + 2");
 expandedForm(42); //, "40 + 2");
 expandedForm(70304); //, "70000 + 300 + 4");
 /********************************************************************* */
+String.prototype.camelCase = function () {
+    /* console.log(this); // this — объект String, а не примитивная строка
+    console.log(this instanceof String); // true
+    if (this.toString() === "") return "";
+    console.log(
+        this.split(" ")
+            .map((word) => word[0].toUpperCase() + word.slice(1))
+            .join("")
+    ); */
+};
 
+"test case".camelCase(); //, "TestCase");
+"camel Case method".camelCase(); //, "CamelCaseMethod");
+"say hello".camelCase(); //, "SayHello");
+"camel case word".camelCase(); //, "CamelCaseWord");
+"".camelCase(); //, "");
 /************************************************************************** */
-class PowerStation {
-    constructor(batteryCapacity, maximumInput, maximumOutput) {
-        this.batteryCapacity = batteryCapacity;
-        this.maximumInput = maximumInput;
-        this.maximumOutput = maximumOutput;
-        this.batteryLevel = batteryCapacity;
-        this.inputPower = 0;
-        this.outputs = new Map();
-    }
-
-    updateInput(voltage, current) {
-        this.inputPower = Math.min(voltage * current, this.maximumInput);
-    }
-
-    connectOutput(outputId) {
-        this.outputs.set(outputId, 0);
-    }
-
-    updateOutput(outputId, voltage, current) {
-        if (this.outputs.has(outputId)) {
-            this.outputs.set(outputId, voltage * current);
-        }
-    }
-
-    disconnectOutput(outputId) {
-        this.outputs.delete(outputId);
-    }
-
-    updateBatteryLevel(capacityLeft) {
-        this.batteryLevel = capacityLeft;
-    }
-
-    get batteryPercentage() {
-        return Number(
-            ((this.batteryLevel / this.batteryCapacity) * 100).toFixed(1)
-        );
-    }
-
-    get totalOutputPower() {
-        return [...this.outputs.values()].reduce(
-            (sum, power) => sum + power,
-            0
-        );
-    }
-
-    get timeRemaining() {
-        const netPower = this.inputPower - this.totalOutputPower;
-        if (netPower === 0) return "99:59";
-        const hours = Math.ceil(this.batteryLevel / Math.abs(netPower));
-        const minutes = (hours * 60) % 60;
-        return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
-            2,
-            "0"
-        )}`;
-    }
-
-    get status() {
-        if (
-            this.totalOutputPower > this.maximumOutput ||
-            this.inputPower > this.maximumInput
-        ) {
-            return "overload";
-        } else if (this.inputPower > this.totalOutputPower) {
-            return "charging";
-        } else if (this.totalOutputPower > this.inputPower) {
-            return "discharging";
-        } else {
-            return "idle";
-        }
-    }
-}
-/**************************************************************************************** */
