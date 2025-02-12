@@ -1,0 +1,20 @@
+.test {
+    display: inline-block;
+    box-sizing: content-box; /* означает, что width измеряется без учета padding и border. */
+    margin: 10px;
+    padding: 5px;
+    border-width: 1px;
+    width: 100px;
+    max-width: 80px;
+    background-color: red;
+}
+.test2 {
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 5px;
+    border-width: 1px;
+    width: 100px;
+    max-width: 80px;
+    background-color: red;
+}

@@ -249,3 +249,138 @@ titleCase("THE WIND IN THE WILLOWS", "The In"); //, 'The Wind in the Willows')
 titleCase("the quick brown fox"); //, 'The Quick Brown Fox')
 
 /*************************************************************************************** */
+
+/* var num = 2;
+function func(num) {
+    var num;//var не переопределяет параметр, поэтому остаётся 10.
+    console.log(num);
+    num = 5;
+}
+func(10);
+console.log(num);//Глобальная num = 2 не меняется */
+
+/*********************************************************************** */
+/* console.log(+"1" + "1" + 2); //'112'
+console.log("A" - "B" + "2"); //"A" - "B" → обе буквы не числа, при вычитании получается NaN. NaN + "2" → NaN приводится к строке "NaN" и конкатенируется.
+console.log("A" - "B" + 2); //NaN + 2 → NaN (любая операция с NaN даёт NaN */
+/******************************************************************************** */
+
+//A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+const decodeWord = (str, offset = 10) => {
+    /* if (offset === 0) {
+        return str;
+    }
+    const res = str.split("").map((char) => {
+        if (char.toUpperCase() === char) {
+            return char;
+        }
+        return String.fromCharCode(
+            char.charCodeAt(0) + offset > 122
+                ? char.charCodeAt(0) + offset - 26
+                : char.charCodeAt(0) + offset
+        );
+    });
+    return res.join(""); */
+};
+
+/* console.log(decodeWord("Abcd", 0)); //Abcd
+console.log(decodeWord("Abcd", 1)); //Acde
+console.log(decodeWord("50km", 2)); //50mo
+console.log(decodeWord("z", 1)); //a
+console.log(decodeWord("world", 1));
+console.log(decodeWord("abcd5", 2)); */
+
+/***************************************************************************** */
+
+function expandedForm(num) {
+    /* const zeros = [];
+    const res = [];
+    while (num > 0) {
+        let oneDigit = num % 10;
+        if (oneDigit !== 0) {
+            res.unshift(oneDigit + zeros.join(""));
+        }
+        num = Math.floor(num / 10);
+        zeros.push(0);
+    }
+    console.log(res.join(" + ")); */
+}
+
+expandedForm(12); //, "10 + 2");
+expandedForm(42); //, "40 + 2");
+expandedForm(70304); //, "70000 + 300 + 4");
+/********************************************************************* */
+
+/************************************************************************** */
+class PowerStation {
+    constructor(batteryCapacity, maximumInput, maximumOutput) {
+        this.batteryCapacity = batteryCapacity;
+        this.maximumInput = maximumInput;
+        this.maximumOutput = maximumOutput;
+        this.batteryLevel = batteryCapacity;
+        this.inputPower = 0;
+        this.outputs = new Map();
+    }
+
+    updateInput(voltage, current) {
+        this.inputPower = Math.min(voltage * current, this.maximumInput);
+    }
+
+    connectOutput(outputId) {
+        this.outputs.set(outputId, 0);
+    }
+
+    updateOutput(outputId, voltage, current) {
+        if (this.outputs.has(outputId)) {
+            this.outputs.set(outputId, voltage * current);
+        }
+    }
+
+    disconnectOutput(outputId) {
+        this.outputs.delete(outputId);
+    }
+
+    updateBatteryLevel(capacityLeft) {
+        this.batteryLevel = capacityLeft;
+    }
+
+    get batteryPercentage() {
+        return Number(
+            ((this.batteryLevel / this.batteryCapacity) * 100).toFixed(1)
+        );
+    }
+
+    get totalOutputPower() {
+        return [...this.outputs.values()].reduce(
+            (sum, power) => sum + power,
+            0
+        );
+    }
+
+    get timeRemaining() {
+        const netPower = this.inputPower - this.totalOutputPower;
+        if (netPower === 0) return "99:59";
+        const hours = Math.ceil(this.batteryLevel / Math.abs(netPower));
+        const minutes = (hours * 60) % 60;
+        return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+            2,
+            "0"
+        )}`;
+    }
+
+    get status() {
+        if (
+            this.totalOutputPower > this.maximumOutput ||
+            this.inputPower > this.maximumInput
+        ) {
+            return "overload";
+        } else if (this.inputPower > this.totalOutputPower) {
+            return "charging";
+        } else if (this.totalOutputPower > this.inputPower) {
+            return "discharging";
+        } else {
+            return "idle";
+        }
+    }
+}
+/**************************************************************************************** */

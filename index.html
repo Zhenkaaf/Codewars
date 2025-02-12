@@ -3,10 +3,49 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/style.css" />
         <title>Document</title>
     </head>
     <body style="background-color: rgb(43, 40, 46)">
         <h1>Codewars</h1>
+        <label for="cars">Выберите машину:</label>
+        <select id="cars" name="car">
+            <option value="volvo">Volvo</option>
+            <option value="bmw">BMW</option>
+            <option value="audi">Audi</option>
+        </select>
+        <hr />
+        <p>
+            Чтобы группировать радио-кнопки, нужно задать им одинаковый атрибут
+            name. Это гарантирует, что пользователь сможет выбрать только один
+            вариант из группы. Атрибут value определяет значение, которое будет
+            отправляться на сервер при выборе.
+        </p>
+        <form>
+            <p>Выберите любимый цвет:</p>
+
+            <label>
+                <input type="radio" name="color" value="red" /> Красный
+            </label>
+
+            <label>
+                <input type="radio" name="color" value="blue" /> Синий
+            </label>
+
+            <label>
+                <input type="radio" name="color" value="green" /> Зеленый
+            </label>
+        </form>
+        <hr />
+        <div class="test">444</div>
+        <hr />
+        <div class="test2">333</div>
+        <hr />
+        <pre>
+            Этот текст 
+            сохраняет    пробелы
+            и разрывы строк.
+        </pre>
         <script src="./js/script.js"></script>
     </body>
 </html>
