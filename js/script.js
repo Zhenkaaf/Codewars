@@ -399,3 +399,52 @@ String.prototype.camelCase = function () {
 "camel case word".camelCase(); //, "CamelCaseWord");
 "".camelCase(); //, "");
 /************************************************************************** */
+
+function toCamelCase(str) {
+    /* if (str === "") return "";
+    console.log(
+        str
+            .split(/[_-]/)
+            .map((word, index) => {
+                if (index === 0 && word[0] === word[0].toLowerCase()) {
+                    return word;
+                } else {
+                    return word[0].toUpperCase() + word.slice(1);
+                }
+            })
+            .join("")
+    ); */
+}
+
+toCamelCase(""); //, '', "An empty string was provided but not returned")
+toCamelCase("the_stealth_warrior"); //, "theStealthWarrior", "toCamelCase('the_stealth_warrior') did not return correct value")
+toCamelCase("The-Stealth-Warrior"); //, "TheStealthWarrior", "toCamelCase('The-Stealth-Warrior') did not return correct value")
+toCamelCase("A-B-C"); //, "ABC", "toCamelCase('A-B-C') did not return correct value")
+/******************************************************************************************** */
+
+function cakes(recipe, available) {
+    for (let [key, value] of Object.entries(recipe)) {
+        if (!available.hasOwnProperty(key) || available[key] < value) {
+            console.log(0);
+            return 0;
+        }
+    }
+    let minAmountOfCakes = Infinity;
+    for (let [key, value] of Object.entries(recipe)) {
+        minAmountOfCakes = Math.min(
+            minAmountOfCakes,
+            Math.floor(available[key] / value)
+        );
+    }
+    console.log(minAmountOfCakes);
+    return minAmountOfCakes;
+}
+
+cakes(
+    { flour: 500, sugar: 200, eggs: 1 },
+    { flour: 1200, sugar: 1200, eggs: 5, milk: 200 }
+); //, 2);
+cakes(
+    { apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100 },
+    { sugar: 500, flour: 2000, milk: 2000 }
+); //, 0);
