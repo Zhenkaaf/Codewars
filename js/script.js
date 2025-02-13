@@ -423,7 +423,7 @@ toCamelCase("A-B-C"); //, "ABC", "toCamelCase('A-B-C') did not return correct va
 /******************************************************************************************** */
 
 function cakes(recipe, available) {
-    for (let [key, value] of Object.entries(recipe)) {
+    /*  for (let [key, value] of Object.entries(recipe)) {
         if (!available.hasOwnProperty(key) || available[key] < value) {
             console.log(0);
             return 0;
@@ -437,7 +437,7 @@ function cakes(recipe, available) {
         );
     }
     console.log(minAmountOfCakes);
-    return minAmountOfCakes;
+    return minAmountOfCakes; */
 }
 
 cakes(
@@ -448,3 +448,28 @@ cakes(
     { apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100 },
     { sugar: 500, flour: 2000, milk: 2000 }
 ); //, 0);
+
+/**************************************************************************************** */
+function scramble(str1, str2) {
+    const existingChars = new Map();
+    str1.split("").forEach((char) =>
+        existingChars.has(char)
+            ? existingChars.set(char, existingChars.get(char) + 1)
+            : existingChars.set(char, 1)
+    );
+
+    for (neededChar of str2) {
+        if (
+            !existingChars.has(neededChar) ||
+            existingChars.get(neededChar) === 0
+        ) {
+            return false;
+        }
+        existingChars.set(neededChar, existingChars.get(neededChar) - 1);
+    }
+    return true;
+}
+
+console.log(scramble("rkqodlw", "world")); //, true );
+console.log(scramble("cedewaraaossoqqyt", "codewars")); //, true );
+console.log(scramble("katas", "steak")); //, false);
