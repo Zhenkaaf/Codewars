@@ -451,7 +451,7 @@ cakes(
 
 /**************************************************************************************** */
 function scramble(str1, str2) {
-    const existingChars = new Map();
+    /*     const existingChars = new Map();
     str1.split("").forEach((char) =>
         existingChars.has(char)
             ? existingChars.set(char, existingChars.get(char) + 1)
@@ -467,9 +467,24 @@ function scramble(str1, str2) {
         }
         existingChars.set(neededChar, existingChars.get(neededChar) - 1);
     }
-    return true;
+    return true; */
 }
 
-console.log(scramble("rkqodlw", "world")); //, true );
+/* console.log(scramble("rkqodlw", "world")); //, true );
 console.log(scramble("cedewaraaossoqqyt", "codewars")); //, true );
-console.log(scramble("katas", "steak")); //, false);
+console.log(scramble("katas", "steak")); //, false); */
+
+/******************************************************************************** */
+function domainName(url) {
+    if (!url.startsWith("http")) {
+        url = "https://" + url;
+    }
+    const hostname = new URL(url).hostname;
+    const domain = hostname.replace(/^www\./, "").split(".")[0];
+    console.log(domain);
+}
+
+domainName("http://google.com"); //, "google");
+domainName("http://google.co.jp"); //, "google");
+domainName("www.xakep.ru"); //, "xakep");
+domainName("https://youtube.com"); //, "youtube");
