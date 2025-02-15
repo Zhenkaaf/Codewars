@@ -476,15 +476,32 @@ console.log(scramble("katas", "steak")); //, false); */
 
 /******************************************************************************** */
 function domainName(url) {
-    if (!url.startsWith("http")) {
+    /*     if (!url.startsWith("http")) {
         url = "https://" + url;
     }
     const hostname = new URL(url).hostname;
     const domain = hostname.replace(/^www\./, "").split(".")[0];
-    console.log(domain);
+    console.log(domain); */
 }
 
 domainName("http://google.com"); //, "google");
 domainName("http://google.co.jp"); //, "google");
 domainName("www.xakep.ru"); //, "xakep");
 domainName("https://youtube.com"); //, "youtube");
+/******************************************************************************** */
+function sumStrings(a, b) {
+    /*  const intA = BigInt(a);
+    const intB = BigInt(b);
+    console.log((intA + intB).toString()); */
+}
+sumStrings("123", "456"); //,'579')
+
+/********************************************************************* */
+/* document.querySelector(".test2").addEventListener("click", () => {
+    console.log("cliiiiiiiiick");
+});
+for (let i = 0; i < 25e8; i++) {
+    if (i % 10e7 === 0) console.log(`Итерация: ${i}`);
+}
+console.log("Цикл завершён"); */
+/************************************************************************* */
