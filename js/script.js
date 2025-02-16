@@ -530,3 +530,29 @@ console.log("Цикл завершён"); */
 он сразу переходит в состояние fulfilled, и вызывается первая функция. 
 Если промис отклонён, будет вызвана вторая функция.*/
 /************************************************************************************************ */
+function comp(array1, array2) {
+    /*     for (let i = 0; i < array1.length; i++) {
+        let squaredNum = array1[i] ** 2;
+        array2.forEach((item, index) => {
+            if (item === squaredNum) {
+                array2.splice(index, 1);
+            }
+        });
+    }
+
+    console.log(!array2.length); */
+    /*  const arr1 = array1.map((item) => item ** 2).sort((a, b) => a - b);
+    const arr2 = [...array2].sort((a, b) => a - b);
+    const isTheSame = arr1.every((item, index) => item === arr2[index]);
+    console.log(isTheSame); */
+}
+
+a = [121, 144, 19, 161, 19, 144, 19, 11];
+b = [121, 14641, 20736, 361, 25921, 361, 20736, 361];
+comp(a, b);
+comp(
+    [2, 10, 9, 5, 3, 3, 1, 0, 7, 3, 5, 10, 6, 1, 8],
+    [1, 36, 4, 9, 49, 9, 9, 25, 100, 100, 64, 1, 1, 25, 81]
+);
+
+/******************************************************************************* */
