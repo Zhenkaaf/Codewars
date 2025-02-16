@@ -505,3 +505,28 @@ for (let i = 0; i < 25e8; i++) {
 }
 console.log("Цикл завершён"); */
 /************************************************************************* */
+
+/* async function getState(promise) {
+    console.log(promise);
+    return Promise.race([
+        promise.then(
+            () => "fulfilled",
+            () => "rejected"
+        ),
+        new Promise((resolve) => setTimeout(() => resolve("pending"), 0)),
+    ]);
+}
+
+(async () => {
+    console.log(await getState(Promise.resolve())); // === "fulfilled"
+    console.log(await getState(Promise.reject())); // === "rejected"
+    console.log(await getState(new Promise(() => {}))); // === "pending"
+})(); */
+
+/* Метод then() принимает до двух функций:
+1 (onFulfilled) — вызывается, если промис успешно выполнен (fulfilled). В неё передаётся результат промиса.
+2 (onRejected) — вызывается, если промис был отклонён (rejected). В неё передаётся причина ошибки. 
+В данном случае, поскольку промис создаётся с помощью Promise.resolve(), 
+он сразу переходит в состояние fulfilled, и вызывается первая функция. 
+Если промис отклонён, будет вызвана вторая функция.*/
+/************************************************************************************************ */
